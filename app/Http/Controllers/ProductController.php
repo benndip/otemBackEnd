@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -60,8 +61,28 @@ class ProductController extends Controller
          $product->description = $request->description;
          $product->price = $request->price;
          $product->category_id = $request->category_id;
+         $product->save();
 
-         
+         $images = $request->file('images');
+         $image_details = array();
+
+         foreach ($images as $image) {
+            $path = $image->store('public');
+            $exploded_string = explode('/',$path);
+            $image_details[] = new ProductImage ([
+                'name' => $exploded_string[1],
+                'path' => $exploded_string[0],
+                'url' => asset("storage/{$exploded_string[1]}")
+            ]);
+         }
+
+         $product->productImages()->saveMany($image_details);
+
+         return response()->json([
+            'success' => true,
+            'message' => 'Product save successfuly',
+         ],200);
+
     }
 
     /**
