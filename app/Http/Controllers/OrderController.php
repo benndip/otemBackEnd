@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -53,7 +57,7 @@ class OrderController extends Controller
             'quantities' => 'required|array'
         ]);
 
-        $user_id = 5;
+        $user_id = auth()->user()->id;
         $products =$request->input('products');
         $quantities = $request->input('quantities');
         $total_amount = 0;

@@ -11,9 +11,8 @@ $factory->define(Product::class, function (Faker $faker) {
         //
         'category_id' => factory(Category::class),
         'name' => factory(Category::class)->create()->name,
-        'description' => $faker->paragraph,
+        'description' => 'This is a nice Product for you to check out. Thanks!',
         'price' => $faker->randomDigit,
-        'status' => Arr::random([0,1]),
-        'visible' => Arr::random([0,1]),
+        'available' => Arr::random([0,1]),
     ];
 });
