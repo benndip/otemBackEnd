@@ -20,9 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->longText('description');
             $table->float('price', 8, 2);
-            $table->boolean('status')->default(1);
+            $table->boolean('available')->default(1);
             $table->boolean('featured')->default(0);
-            $table->boolean('visible')->default(1);
             $table->timestamps();
         });
     }
