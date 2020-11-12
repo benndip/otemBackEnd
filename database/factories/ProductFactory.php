@@ -5,6 +5,7 @@
 use App\Models\Product;
 use Faker\Generator as Faker;
 use App\Models\Category;
+use Illuminate\support\Arr;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
